@@ -1,70 +1,122 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-
-export default function HomeScreen() {
+const Home = () => {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <ScrollView style={styles.container}>
+      {/* Header Section */}
+      <View style={styles.header}>
+        <Icon name="call" size={30} color="#fff" />
+        <Text style={styles.headerText}>Vishing Detection</Text>
+      </View>
+
+      {/* Intro Section */}
+      <View style={styles.intro}>
+        <Text style={styles.introTitle}>Welcome to Vishing Protection</Text>
+        <Text style={styles.introText}>
+          Stay safe from fraudulent calls. Our app helps identify and protect you from vishing scams.
+        </Text>
+      </View>
+
+      {/* Features Section */}
+      <View style={styles.featureSection}>
+        <Text style={styles.featureTitle}>Key Features</Text>
+
+        <View style={styles.featureCard}>
+          <Icon name="shield-checkmark" size={40} color="#4CAF50" />
+          <Text style={styles.featureCardText}>Real-time Call Protection</Text>
+        </View>
+
+        <View style={styles.featureCard}>
+          <Icon name="analytics" size={40} color="#2196F3" />
+          <Text style={styles.featureCardText}>Fraud Detection Analytics</Text>
+        </View>
+
+        <View style={styles.featureCard}>
+          <Icon name="notifications" size={40} color="#FF5722" />
+          <Text style={styles.featureCardText}>Instant Alerts & Notifications</Text>
+        </View>
+      </View>
+
+      {/* Call to Action Button */}
+      <TouchableOpacity style={styles.ctaButton}>
+        <Text style={styles.ctaButtonText}>Get Started</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  header: {
+    backgroundColor: '#6200EE',
+    height: hp('15%'),
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingTop: 20,
+  },
+  headerText: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginLeft: 10,
+  },
+  intro: {
+    padding: 20,
+    alignItems: 'center',
+  },
+  introTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+  },
+  introText: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#666',
+  },
+  featureSection: {
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    backgroundColor: '#f4f4f4',
+  },
+  featureTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  featureCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    marginBottom: 20,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  featureCardText: {
+    fontSize: 18,
+    color: '#333',
+    marginLeft: 15,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  ctaButton: {
+    backgroundColor: '#6200EE',
+    paddingVertical: 15,
+    borderRadius: 10,
+    marginHorizontal: 40,
+    marginTop: 30,
+  },
+  ctaButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
 });
+
+export default Home;
